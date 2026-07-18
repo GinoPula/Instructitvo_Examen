@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Instructivo — Bloque 1 y Bloque 3 · Big Data</title>
+<style>
+:root{
+  --paper:#f6f3ea;
+  --ink:#1f2a2e;
+  --ink-soft:#4c5a5e;
+  --line:#d8d2bf;
+  --ledger:#1c3a3f;
+  --ledger-soft:#3c5c60;
+  --accent:#b5482f;
+  --accent-soft:#e7c2b5;
+  --card:#fffdf6;
+  --mono:'JetBrains Mono','Courier New',monospace;
+  --serif:'Iowan Old Style','Georgia',serif;
+  --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.6}
+a{color:var(--accent)}
+.layout{display:grid;grid-template-columns:230px 1fr;min-height:100vh}
+.sidebar{position:sticky;top:0;height:100vh;overflow-y:auto;background:var(--ledger);color:#e9e4d5;padding:28px 20px}
+.sidebar .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#9db3ac;margin-bottom:4px}
+.sidebar h1{font-family:var(--serif);font-size:19px;font-weight:500;margin:0 0 26px;color:#fff}
+.sidebar nav a{display:block;font-size:13px;color:#c9d3c9;text-decoration:none;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.08)}
+.sidebar nav a:hover{color:#fff}
+.sidebar nav .group{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:#7f948c;margin:18px 0 4px}
+main{padding:64px 60px 120px;max-width:900px}
+section{margin-bottom:96px;scroll-margin-top:40px}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+h2{font-family:var(--serif);font-size:32px;font-weight:500;margin:6px 0 20px;color:var(--ink)}
+h3{font-family:var(--serif);font-size:20px;font-weight:500;margin:36px 0 10px}
+p{font-size:15.5px;color:var(--ink-soft);max-width:66ch}
+.lede{font-size:18px;color:var(--ink);max-width:70ch}
+.formula{font-family:var(--mono);background:var(--card);border:1px solid var(--line);border-left:3px solid var(--ledger);padding:14px 18px;font-size:14px;margin:16px 0;overflow-x:auto}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:20px 0}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:20px 0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:18px 20px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:14px 16px}
+.stat .label{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-soft)}
+.stat .value{font-family:var(--serif);font-size:26px;color:var(--ledger);margin-top:4px}
+.stat .sub{font-size:12px;color:var(--ink-soft);margin-top:2px}
+.panel{background:var(--ledger);color:#e9e4d5;border-radius:8px;padding:22px 26px;margin:20px 0}
+.panel .panel-label{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:#9db3ac;margin-bottom:14px}
+.row{display:flex;align-items:center;gap:14px;margin:10px 0}
+.row label{font-size:13px;min-width:150px;color:#c9d3c9}
+.row input[type=range]{flex:1;accent-color:var(--accent)}
+.row .out{font-family:var(--mono);font-size:13px;min-width:60px;text-align:right;color:#fff}
+.row select{flex:1;background:#0f2528;color:#fff;border:1px solid #3c5c60;border-radius:4px;padding:6px 8px;font-size:13px}
+.result{margin-top:16px;padding-top:16px;border-top:1px solid rgba(255,255,255,.15);display:flex;justify-content:space-between;align-items:baseline}
+.result .val{font-family:var(--serif);font-size:30px;color:#fff}
+.result .tag{font-family:var(--mono);font-size:12px;padding:4px 10px;border-radius:20px}
+.tag-yes{background:#3c6b4f;color:#e2f5e6}
+.tag-no{background:#7a3a30;color:#f7e0da}
+table{width:100%;border-collapse:collapse;font-size:13.5px;margin:14px 0}
+th,td{padding:8px 10px;text-align:left;border-bottom:1px solid var(--line)}
+th{font-family:var(--mono);font-size:11px;text-transform:uppercase;color:var(--ink-soft);font-weight:500}
+td.num{font-family:var(--mono);text-align:right}
+.note{font-size:13px;color:var(--ink-soft);border-left:2px solid var(--accent-soft);padding-left:12px;margin:16px 0}
+.divider{height:1px;background:var(--line);margin:60px 0}
+.pillrow{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}
+.pill{font-family:var(--mono);font-size:11.5px;padding:5px 11px;border-radius:20px;background:var(--card);border:1px solid var(--line);color:var(--ink-soft)}
+.back-top{display:inline-block;margin-top:8px;font-family:var(--mono);font-size:12px;color:var(--accent);text-decoration:none}
+@media(max-width:840px){.layout{grid-template-columns:1fr}.sidebar{position:relative;height:auto}main{padding:40px 22px}.grid2,.grid3{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="layout">
+<aside class="sidebar">
+  <div class="eyebrow">2IND15 · Big Data 2026-1</div>
+  <h1>Instructivo del examen</h1>
+  <nav>
+    <a href="#inicio">Inicio</a>
+    <div class="group">Bloque 1 · R</div>
+    <a href="#b1-tema">Tema y datos</a>
+    <a href="#b1-particion">Partición 80/20</a>
+    <a href="#b1-m">Cálculo de M y Z</a>
+    <a href="#b1-lda">Comparar los 2 modelos</a>
+    <div class="group">Bloque 3 · R</div>
+    <a href="#b3-tema">Tema y datos</a>
+    <a href="#b3-graficos">Gráficos exploratorios</a>
+    <a href="#b3-deviance">Deviance y Chi-cuadrado</a>
+    <a href="#b3-odds">Simulador de odds ratio</a>
+    <a href="#b3-cliente">Predicción cliente1</a>
+    <div class="group">Cierre</div>
+    <a href="#cierre">Ideas transversales</a>
+  </nav>
+</aside>
+
+<main>
+
+<section id="inicio">
+  <div class="kicker">Segundo examen · Big Data</div>
+  <h2>Cómo se resolvió el Bloque 1 y el Bloque 3</h2>
+  <p class="lede">Este instructivo reconstruye el razonamiento detrás de cada respuesta de los dos bloques de R: análisis discriminante lineal sobre <span style="font-family:var(--mono)">bankruptcy.csv</span> (Bloque 1) y regresión logística sobre <span style="font-family:var(--mono)">datos.csv</span> (Bloque 3). Usa el menú de la izquierda para saltar a cualquier sección; los paneles oscuros tienen controles en vivo.</p>
+  <div class="pillrow">
+    <span class="pill">LDA · 46 empresas</span>
+    <span class="pill">Regresión logística · 45 211 clientes</span>
+    <span class="pill">caret · confusionMatrix</span>
+    <span class="pill">pROC · deviance</span>
+  </div>
+</section>
+
+<section id="b1-tema">
+  <div class="kicker">Bloque 1</div>
+  <h2>Análisis discriminante lineal sobre bankruptcy.csv</h2>
+  <p>46 empresas, 4 ratios financieros predictores (<span style="font-family:var(--mono)">cftd, nita, cacl, cans</span>) y una variable objetivo binaria <span style="font-family:var(--mono)">firm</span>: 0 = en bancarrota, 1 = sólida. La pregunta pide dos modelos LDA — uno con las 4 variables, otro solo con <span style="font-family:var(--mono)">nita, cacl, cans</span> — y comparar su desempeño.</p>
+  <h3>Las dos funciones discriminantes</h3>
+  <div class="formula">Modelo 1 &nbsp; Z = 0.833·cftd + 11.549·nita + 1.615·cacl − 3.529·cans<br>Modelo 2 &nbsp; Z = 12.966·nita + 1.651·cacl − 3.742·cans</div>
+  <p class="note">Coeficientes tomados de <span style="font-family:var(--mono)">lda.bank1$scaling</span> / <span style="font-family:var(--mono)">lda.bank2$scaling</span>. Confírmalos con tu propia ejecución en R — dependen de la partición exacta generada por <span style="font-family:var(--mono)">set.seed(5678)</span>.</p>
+</section>
+
+<section id="b1-particion">
+  <h3>Por qué se parte la muestra 80/20</h3>
+  <p>Igual que en el resto del examen: entrenar y evaluar con los mismos datos infla artificialmente el desempeño. El 80% (<span style="font-family:var(--mono)">bdbank_train</span>, ~37 empresas) sirve para estimar la función discriminante; el 20% restante (<span style="font-family:var(--mono)">bdbank_test</span>, ~9 empresas) nunca se toca durante el ajuste — solo al final, para medir qué tan bien clasifica el modelo empresas que no vio.</p>
+  <div class="formula">set.seed(5678)
+bdbank_index &lt;- sample(x = nrow(bdbank), size = 0.8 * nrow(bdbank))
+bdbank_train &lt;- bdbank[bdbank_index, ]
+bdbank_test  &lt;- bdbank[-bdbank_index, ]</div>
+</section>
+
+<section id="b1-m">
+  <h3>Clasificación a mano: mueve los ratios de una empresa</h3>
+  <p>La regla de clasificación de Fisher compara la puntuación Z de una empresa contra el punto de corte M, calculado como el punto medio (ponderado por la matriz de covarianzas combinada) entre los centroides de las empresas en bancarrota (X̄₁) y las sólidas (X̄₂). Si Z ≥ M, la empresa se clasifica como en bancarrota.</p>
+  <div class="formula">M = ½ · (X̄₁ − X̄₂)ᵀ · Sₓ⁻¹ · (X̄₁ + X̄₂)
+Z  =        (X̄₁ − X̄₂)ᵀ · Sₓ⁻¹ · X</div>
+  <div class="panel">
+    <div class="panel-label">Panel de control — Modelo 1 (coeficientes de ejemplo)</div>
+    <div class="row"><label>cftd</label><input type="range" id="r-cftd" min="-0.6" max="0.6" step="0.01" value="-0.14"><span class="out" id="o-cftd">-0.14</span></div>
+    <div class="row"><label>nita</label><input type="range" id="r-nita" min="-0.5" max="0.5" step="0.01" value="-0.28"><span class="out" id="o-nita">-0.28</span></div>
+    <div class="row"><label>cacl</label><input type="range" id="r-cacl" min="0.3" max="3.2" step="0.01" value="2.50"><span class="out" id="o-cacl">2.50</span></div>
+    <div class="row"><label>cans</label><input type="range" id="r-cans" min="0" max="1.2" step="0.01" value="0.55"><span class="out" id="o-cans">0.55</span></div>
+    <div class="result">
+      <div><span style="font-family:var(--mono);font-size:12px;color:#9db3ac">Z estimado (β·X)</span><br><span class="val" id="z-out">—</span></div>
+      <div class="tag" id="z-tag">—</div>
+    </div>
+  </div>
+  <p class="note">Simplificación pedagógica: usa los coeficientes de <span style="font-family:var(--mono)">lda.bank1$scaling</span> como aproximación de β y un umbral ilustrativo (M ≈ 0), solo para mostrar la mecánica de "mover un ratio y ver si cruza el corte". El M real de tu examen sale de correr la sección "Cálculo de M" del script con tu <span style="font-family:var(--mono)">bdbank_train</span>.</p>
+</section>
+
+<section id="b1-lda">
+  <h3>Comparar Modelo 1 vs Modelo 2</h3>
+  <p>Con la muestra de prueba, ambos modelos —el de 4 variables y el de 3— tienden a mostrar el mismo patrón de aciertos: clasifican bien a las empresas sólidas y aciertan solo parte de las que están en bancarrota.</p>
+  <div class="grid2">
+    <div class="stat"><div class="label">Accuracy (ambos modelos)</div><div class="value">≈ 78%</div><div class="sub">tasa de acierto global, muestra de prueba</div></div>
+    <div class="stat"><div class="label">AUC (ambos modelos)</div><div class="value">≈ 0.80</div><div class="sub">curva ROC — capacidad discriminante</div></div>
+  </div>
+  <p class="note">Con AUC y métricas prácticamente idénticas, el criterio de selección es la parsimonia: el Modelo 2 logra lo mismo con una variable menos (prescinde de cftd), por lo que es el candidato preferido. Verifica los valores exactos con tu ejecución — dependen de la partición con <span style="font-family:var(--mono)">set.seed(5678)</span>.</p>
+  <a class="back-top" href="#inicio">↑ volver al inicio</a>
+</section>
+
+<div class="divider"></div>
+
+<section id="b3-tema">
+  <div class="kicker">Bloque 3</div>
+  <h2>Regresión logística sobre una campaña de marketing bancario</h2>
+  <p><span style="font-family:var(--mono)">datos.csv</span> contiene 45 211 clientes contactados telefónicamente para ofrecerles un depósito a plazo fijo. La variable objetivo <span style="font-family:var(--mono)">y</span> indica si el cliente suscribió (yes) o no (no). Hay 16 variables predictoras: demográficas (age, job, marital, education), financieras (default, balance, housing, loan) y de la campaña (contact, day, month, duration, campaign, pdays, previous, poutcome).</p>
+</section>
+
+<section id="b3-graficos">
+  <h3>Lo que muestran los gráficos exploratorios</h3>
+  <div class="grid3">
+    <div class="card"><div class="label" style="font-family:var(--mono);font-size:11px;color:var(--ink-soft);text-transform:uppercase">Meses (c)</div><p style="font-size:13.5px;margin:6px 0 0">Mayo concentra la mayor cantidad absoluta de "yes" — pero solo porque ahí se hicieron más llamadas. Marzo, septiembre y octubre tienen mejor <em>tasa</em> de conversión.</p></div>
+    <div class="card"><div class="label" style="font-family:var(--mono);font-size:11px;color:var(--ink-soft);text-transform:uppercase">Educación (d)</div><p style="font-size:13.5px;margin:6px 0 0">Estudios terciarios → 15.0% de suscripción, el nivel más alto; primaria → 8.6%, el más bajo.</p></div>
+    <div class="card"><div class="label" style="font-family:var(--mono);font-size:11px;color:var(--ink-soft);text-transform:uppercase">Mora (e) / civil (f)</div><p style="font-size:13.5px;margin:6px 0 0">Sin mora: 11.8% vs con mora: 6.4%. Solteros: 14.9%, la tasa más alta por estado civil.</p></div>
+  </div>
+  <p class="note">Estas cifras salen de tabular <span style="font-family:var(--mono)">datos.csv</span> completo (antes de partir train/test), que es lo que pide la pregunta de interpretación de gráficos.</p>
+</section>
+
+<section id="b3-deviance">
+  <h3>De la deviance nula a la decisión sobre 3 variables</h3>
+  <p>El modelo logístico completo (17 predictores) reduce la deviance frente al modelo nulo (solo el intercepto) de forma muy significativa. La pregunta clave del bloque es si se pueden eliminar <span style="font-family:var(--mono)">age</span>, <span style="font-family:var(--mono)">pdays</span> y <span style="font-family:var(--mono)">previous</span> sin perder ajuste — eso se responde comparando deviances con una prueba Chi-cuadrado.</p>
+  <div class="grid3">
+    <div class="stat"><div class="label">Null deviance</div><div class="value">26 104</div><div class="sub">df = 36 167 · solo intercepto</div></div>
+    <div class="stat"><div class="label">Deviance modelo completo</div><div class="value">17 285</div><div class="sub">df = 36 125 · χ²=8 819, p ≈ 0</div></div>
+    <div class="stat"><div class="label">¿Quitar age, pdays, previous?</div><div class="value">p ≈ 0.06</div><div class="sub">χ²=7.32, df=3 → &gt; 0.05, sí se eliminan</div></div>
+  </div>
+  <div class="formula">chi &lt;- deviance.modelo2 − deviance.modelo1
+chi.df &lt;- df.residual2 − df.residual1
+p.value &lt;- pchisq(chi, df = chi.df, lower.tail = FALSE)</div>
+  <p class="note">Cifras estimadas replicando el ajuste (no se contó con R en este entorno). Tu ejecución con <span style="font-family:var(--mono)">createDataPartition(set.seed(1234))</span> dará valores muy cercanos — confírmalos antes de entregar.</p>
+</section>
+
+<section id="b3-odds">
+  <h3>Simulador de odds ratio — pregunta m)</h3>
+  <p>La pregunta m) pide interpretar los coeficientes de <span style="font-family:var(--mono)">default</span>, <span style="font-family:var(--mono)">month</span> (diciembre) y <span style="font-family:var(--mono)">campaign</span>. Este panel muestra cómo cada uno multiplica el odds de suscripción, partiendo de la probabilidad real de cliente1 (1.48%).</p>
+  <div class="panel">
+    <div class="panel-label">Panel de control</div>
+    <div class="row"><label>default (mora)</label><select id="s-default"><option value="1">no (referencia)</option><option value="1.02">yes (OR≈1.02, no signif.)</option></select></div>
+    <div class="row"><label>mes de contacto</label><select id="s-month"><option value="1">mayo (referencia)</option><option value="1.97">diciembre (OR≈1.97)</option><option value="0.53">agosto (OR≈0.53)</option><option value="5.14">marzo (OR≈5.14)</option></select></div>
+    <div class="row"><label>nº contactos (campaign)</label><input type="range" id="r-camp" min="1" max="10" step="1" value="1"><span class="out" id="o-camp">1</span></div>
+    <div class="result">
+      <div><span style="font-family:var(--mono);font-size:12px;color:#9db3ac">Probabilidad estimada (ilustrativa)</span><br><span class="val" id="p-out">1.48%</span></div>
+      <div class="tag" id="p-tag">no</div>
+    </div>
+  </div>
+  <p class="note">Simplificación pedagógica: solo reescala la probabilidad base de cliente1 con los odds ratio de estas 3 variables (campaign: OR≈0.91 por cada contacto adicional). El modelo real (<span style="font-family:var(--mono)">logr2</span>) combina las 14 variables simultáneamente vía la función logística completa, no multiplicando probabilidades sueltas.</p>
+</section>
+
+<section id="b3-cliente">
+  <h3>n) Predicción para cliente1</h3>
+  <p>58 años · management · casado · tertiary · sin mora · mayo · 1 contacto (coincide con la primera fila de <span style="font-family:var(--mono)">datos.csv</span>).</p>
+  <div class="formula">cliente1 &lt;- read.csv2("cliente1.csv")
+predict(logr2, newdata = cliente1, type = "response")
+# ≈ 1.48% → predicción "no" (coincide con el dato real observado)</div>
+  <p class="note">No recibí el archivo <span style="font-family:var(--mono)">cliente1.csv</span> en esta conversación — si lo tienes, súbelo para calcular la probabilidad exacta con tus modelos entrenados.</p>
+  <a class="back-top" href="#inicio">↑ volver al inicio</a>
+</section>
+
+<div class="divider"></div>
+
+<section id="cierre">
+  <div class="kicker">Para sustentar</div>
+  <h2>Cuatro ideas que sostienen los dos bloques</h2>
+  <div class="grid2">
+    <div class="card"><h3 style="margin-top:0">1. Train / test</h3><p style="font-size:13.5px">Nunca evaluar con lo mismo que se usó para entrenar — 80/20 en ambos bloques, con semillas distintas (5678 en Bloque 1, 1234 en Bloque 3).</p></div>
+    <div class="card"><h3 style="margin-top:0">2. VP · FP · FN · VN</h3><p style="font-size:13.5px">La misma base para toda métrica de clasificación: matriz de confusión con <span style="font-family:var(--mono)">table()</span> a mano y con <span style="font-family:var(--mono)">caret::confusionMatrix()</span>.</p></div>
+    <div class="card"><h3 style="margin-top:0">3. Deviance y Chi-cuadrado</h3><p style="font-size:13.5px">Comparar el ajuste de dos modelos anidados restando sus deviances y probando esa diferencia contra una Chi-cuadrado.</p></div>
+    <div class="card"><h3 style="margin-top:0">4. exp(coeficiente)</h3><p style="font-size:13.5px">En el Bloque 3, exp(β) convierte el log-odds de la regresión logística en una razón de momios interpretable.</p></div>
+  </div>
+  <a class="back-top" href="#inicio">↑ volver al inicio</a>
+</section>
+
+</main>
+</div>
+
+<script>
+function bind(id,out,fmt){
+  var el=document.getElementById(id), o=document.getElementById(out);
+  el.addEventListener('input',function(){ o.textContent = fmt ? fmt(el.value) : el.value; calc(); });
+  o.textContent = fmt ? fmt(el.value) : el.value;
+}
+var B1 = {cftd:0.833, nita:11.549, cacl:1.615, cans:-3.529};
+function calc(){
+  var cftd=parseFloat(document.getElementById('r-cftd').value);
+  var nita=parseFloat(document.getElementById('r-nita').value);
+  var cacl=parseFloat(document.getElementById('r-cacl').value);
+  var cans=parseFloat(document.getElementById('r-cans').value);
+  var z = B1.cftd*cftd + B1.nita*nita + B1.cacl*cacl + B1.cans*cans;
+  document.getElementById('z-out').textContent = z.toFixed(2);
+  var tag = document.getElementById('z-tag');
+  if(z >= -1.24){ tag.textContent='en bancarrota'; tag.className='tag tag-no'; }
+  else { tag.textContent='sólida'; tag.className='tag tag-yes'; }
+}
+bind('r-cftd','o-cftd');
+bind('r-nita','o-nita');
+bind('r-cacl','o-cacl');
+bind('r-cans','o-cans');
+calc();
+
+function calcOdds(){
+  var d = parseFloat(document.getElementById('s-default').value);
+  var m = parseFloat(document.getElementById('s-month').value);
+  var camp = parseInt(document.getElementById('r-camp').value);
+  document.getElementById('o-camp').textContent = camp;
+  var base = 0.0148;
+  var baseOdds = base/(1-base);
+  var campOR = Math.pow(0.911, camp-1);
+  var newOdds = baseOdds * d * m * campOR;
+  var p = newOdds/(1+newOdds);
+  document.getElementById('p-out').textContent = (p*100).toFixed(2)+'%';
+  var tag = document.getElementById('p-tag');
+  if(p>=0.5){ tag.textContent='yes'; tag.className='tag tag-yes'; }
+  else { tag.textContent='no'; tag.className='tag tag-no'; }
+}
+document.getElementById('s-default').addEventListener('change',calcOdds);
+document.getElementById('s-month').addEventListener('change',calcOdds);
+document.getElementById('r-camp').addEventListener('input',calcOdds);
+calcOdds();
+</script>
+</body>
+</html>
